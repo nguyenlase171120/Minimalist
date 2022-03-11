@@ -3,9 +3,18 @@ const MiddlewareController = require("../../controllers/middleWareController");
 
 const router = require("express").Router();
 
-//Register ner user
+// user routes
 router.post("/register", AuthController.registerNewUser);
 router.post("/login", AuthController.loginUser);
-router.get("/", MiddlewareController.verifyToken, AuthController.getAllUser);
+router.get(
+  "/getAll-user",
+  MiddlewareController.verifyToken,
+  AuthController.getAllUser
+);
+router.delete(
+  "/:id",
+  MiddlewareController.verifyToken,
+  AuthController.deleteUserById
+);
 
 module.exports = router;

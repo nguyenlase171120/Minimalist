@@ -8,10 +8,10 @@ const AuthController = {
     try {
       const { userEmail, username } = req.body;
 
-      // //Check account is existed
+      //Check account is existed
       const accountExisted = await UserModelRegister.findOne({ userEmail });
       if (accountExisted)
-        res
+        return res
           .status(403)
           .json({ success: false, message: "Account already exists" });
 
@@ -32,13 +32,13 @@ const AuthController = {
       //Save new user to database
       await newUser.save();
 
-      res.status(200).json({
+      return res.status(200).json({
         success: true,
         message: "Register successfully",
         data: { ...others },
       });
     } catch (error) {
-      res
+      return res
         .status(500)
         .json({ success: false, message: "Internal server error !!" });
     }
@@ -73,12 +73,16 @@ const AuthController = {
       const { password, ...others } = userExisted._doc;
 
       //Handle token
-      const access_token = await jwt.sign({}, process.env.ACCESS_TOKEN, {
-        expiresIn: "30d",
-      });
+      const access_token = await jwt.sign(
+        { userId: userExisted.id },
+        process.env.ACCESS_TOKEN,
+        {
+          expiresIn: "30d",
+        }
+      );
 
       //All good
-      res.status(200).json({
+      return res.status(200).json({
         success: true,
         message: "Login successfully",
         data: { ...others },
@@ -92,7 +96,49 @@ const AuthController = {
   },
 
   //Get All users
-  getAllUser: async (req, res) => {},
+  getAllUser: async (req, res) => {
+    try {
+      const listUser = await UserModelRegister.find();
+      if (!listUser)
+        res
+          .status(401)
+          .json({ success: false, message: "You are not allowed that" });
+
+      //All good
+      res.status(200).json({
+        success: true,
+        message: "Get list user successfully",
+        data: listUser,
+      });
+    } catch (error) {
+      res
+        .status(500)
+        .json({ success: false, message: "Internal server error" });
+    }
+  },
+
+  //Delete user by id
+  deleteUserById: async (req, res) => {
+    try {
+      const id = req.params.id;
+
+      //Check user is valid or not
+      await UserModelRegister.findById(id, (err) => {
+        res
+          .status(403)
+          .json({ success: false, message: "User id is invalid inside !!" });
+      });
+
+      //All Good
+      res
+        .status(200)
+        .json({ success: true, message: "Delete successfully", data: user });
+    } catch (error) {
+      res
+        .status(500)
+        .json({ success: false, message: "Internal server error delete" });
+    }
+  },
 };
 
 module.exports = AuthController;

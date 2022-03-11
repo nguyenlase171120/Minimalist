@@ -8,19 +8,22 @@ const MiddlewareController = {
       const token = await tokenBearer.split(" ")[1];
       //compare jwt token
 
-      await jwt.verify(token, process.env.ACCESS_TOKEN, (err) => {
+      await jwt.verify(token, process.env.ACCESS_TOKEN, (err, user) => {
         if (err) {
           res
             .status(401)
             .json({ success: false, message: "You are not allowed that" });
         }
+        req.userId = user.userId;
       });
 
-      res.status(200).json({ token });
+      //All goods
+      next();
     } catch (error) {
-      res
-        .status(500)
-        .json({ success: false, message: "Internal server error !!" });
+      res.status(500).json({
+        success: false,
+        message: "Internal server error middleware !!",
+      });
     }
   },
 };

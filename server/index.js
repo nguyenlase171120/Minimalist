@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 
 //Routes modules
 const authRoutes = require("./routes/auth/AuthRoutes");
+const postRoutes = require("./routes/post/PostRoutes");
 
 //Create app to run server with
 const app = express();
@@ -17,6 +18,7 @@ app.use(cors());
 
 //Routes
 app.use("/v1/auth", authRoutes);
+app.use("/posts", postRoutes);
 
 //Connect DB and listen port
 
