@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 
 function SubNavBarChildren() {
+  const handleScroll = () => {
+    window.scrollTo({ top: 100, behavior: "smooth" });
+  };
+
   return (
     <div className="absolute top-full left-[-60px] ">
       <ul className=" bg-white border-2 border-[#D8B975] w-[222px] flex items-center justify-center flex-col">
@@ -9,26 +13,36 @@ function SubNavBarChildren() {
         </li>
 
         <li className="header-sub-link">
-          <Link to="/">Life Style</Link>
+          <Link to="/category/Lifestyle" onClick={handleScroll}>
+            Life Style
+          </Link>
         </li>
         <li className="header-sub-link">
-          <Link to="/">Nhật ký</Link>
-        </li>
-
-        <li className="header-sub-link">
-          <Link to="/">Cuộc sống ở Nhật Bản</Link>
-        </li>
-
-        <li className="header-sub-link">
-          <Link to="/">Cuộc sống ở Hà Nội</Link>
+          <Link to="/category/Nhật ký" onClick={handleScroll}>
+            Nhật ký
+          </Link>
         </li>
 
         <li className="header-sub-link">
-          <Link to="/">Hành trình của mình</Link>
+          <Link to="/category/Cuộc sống ở nhật bản">Cuộc sống ở Nhật Bản</Link>
         </li>
 
         <li className="header-sub-link">
-          <Link to="/">Học ngoại ngữ </Link>
+          <Link to="/category/Cuộc sống ở Hà Nội" onClick={handleScroll}>
+            Cuộc sống ở Hà Nội
+          </Link>
+        </li>
+
+        <li className="header-sub-link">
+          <Link to="/category/Hành trình của mình" onClick={handleScroll}>
+            Hành trình của mình
+          </Link>
+        </li>
+
+        <li className="header-sub-link">
+          <Link to="/category/Học ngoại ngữ" onClick={handleScroll}>
+            Học ngoại ngữ{" "}
+          </Link>
         </li>
 
         <li className="header-sub-link">

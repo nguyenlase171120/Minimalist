@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 function SideBarChildren() {
   const [listImageInsta, setListImageInsta] = useState(() => {
@@ -61,20 +62,30 @@ function SideBarChildren() {
       },
     ];
   });
+  const navigate = useNavigate();
+
+  const [keySearch, setKeySearch] = useState("");
+
+  const handleSearch = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    navigate(`/search/${keySearch}`);
+  };
 
   return (
     <div>
       <div className="flex items-center relative outline-none mb-4 w-full">
         <input
           type="text"
+          onChange={(e) => setKeySearch(e.target.value)}
           className="border-2 flex justify-start  border-black py-1 w-[250px] px-1 focus:outline-none focus:border-2 focus:border-[#D8B975]"
         />
-        <div className="flex hover:bg-[#D8B975] hover:text-white bg-black py-1 px-7 items-center cursor-pointer absolute top-0 right-0 bottom-0 ">
-          <button className="mr-4 text-white uppercase hover:[#D8B975]">
-            Search
-          </button>
-          <AiOutlineArrowRight className="text-[#D8B975] " />
-        </div>
+        <button
+          onClick={handleSearch}
+          className="flex hover:bg-[#D8B975] outline-none border-1 border-transparents text-white mr-4 ml-3 hover:text-white bg-black py-1 px-7 items-center cursor-pointer absolute top-0 right-[-30px] bottom-0"
+        >
+          Search
+          <AiOutlineArrowRight className="text-white ml-3 " />
+        </button>
       </div>
 
       <p className="w-full py-3 mb-3 uppercase flex_center bg-[#DDDDDD]">
@@ -114,10 +125,6 @@ function SideBarChildren() {
             );
           })}
         </div>
-      </div>
-
-      <div className="mt-4">
-        <p className="uppercase py-3 mb-3 bg-[#DDDDDD] text-center">Archives</p>
       </div>
     </div>
   );

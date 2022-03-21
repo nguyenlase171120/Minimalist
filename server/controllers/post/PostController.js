@@ -59,7 +59,7 @@ const PostController = {
   getPostById: async (req, res) => {
     try {
       const postId = req.params.id;
-      const result = await PostModel.findOne({ id: postId });
+      const result = await PostModel.findOne({ _id: postId });
 
       if (!result)
         res
@@ -99,10 +99,27 @@ const PostController = {
   //Get all post by category
   getPostByCategory: async (req, res) => {
     try {
-      const category = req.params.category;
-      const post = await PostModel.findOne({ category });
+      const categoryParam = req.params.category;
+      const listPosts = await PostModel.find();
+      const newArray = [];
 
-      if (!post)
+      listPosts.map((post) => {
+        const subListPost = post.category.split(", ");
+
+        if (subListPost != null) {
+          subListPost.map((post2) => {
+            const result = newArray.includes(post2);
+
+            if (!result) {
+              if (post2 === categoryParam) {
+                newArray.push(post);
+              }
+            }
+          });
+        }
+      });
+
+      if (!categoryParam)
         res
           .status(401)
           .json({ success: false, message: "Get post by category failed" });
@@ -110,7 +127,7 @@ const PostController = {
       res.status(200).json({
         success: true,
         message: "Get post by category successfully",
-        data: post,
+        data: newArray,
       });
     } catch (error) {
       res
@@ -150,6 +167,130 @@ const PostController = {
         message: " Get list posts for page successfully ",
         data: listPosts,
       });
+    } catch (error) {
+      res
+        .status(500)
+        .json({ success: false, message: "Internal server error" });
+    }
+  },
+
+  handleCoverMonth: (month) => {
+    switch (month) {
+      case "1": {
+        return "January";
+      }
+      case "2": {
+        return "February";
+      }
+      case "3": {
+        return "March";
+      }
+      case "4": {
+        return "April";
+      }
+      case "5": {
+        return "May";
+      }
+      case "6": {
+        return "June";
+      }
+      case "7": {
+        return "July";
+      }
+      case "8": {
+        return "August";
+      }
+      case "9": {
+        return "September";
+      }
+      case "10": {
+        return "October";
+      }
+      case "11": {
+        return "November";
+      }
+      case "12": {
+        return "December";
+      }
+    }
+  },
+
+  //Get post by archives
+  getPostsByArchives: async (req, res) => {
+    try {
+      const archiveParam = req.params.archives;
+      const archiveArray = archiveParam.split(" ");
+      const monthParam = archiveArray[0];
+      const yearParam = archiveArray[1];
+
+      const listPosts = await PostModel.find();
+      const newArray = [];
+      if (listPosts) {
+        listPosts.map((post) => {
+          const dateArray = post.createdAt.toLocaleDateString().split("/");
+          const yearSql = dateArray[2].trim();
+          const monthNumber = dateArray[0].trim();
+          const monthConvert = PostController.handleCoverMonth(monthNumber);
+
+          if (monthConvert === monthParam && yearParam === yearSql) {
+            newArray.push(post);
+          }
+        });
+      }
+
+      res.status(200).json({
+        success: true,
+        message: "Get posts by archives successfully ",
+        data: newArray,
+      });
+    } catch (error) {
+      res
+        .status(500)
+        .json({ success: false, message: "Internal server error at archives" });
+    }
+  },
+
+  removeAccent: (str) => {
+    return str
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/đ/g, "d")
+      .replace(/Đ/g, "D");
+  },
+
+  //Search post by title
+  getPostsBySearch: async (req, res) => {
+    try {
+      const titleParam = req.params.title;
+      console.log(titleParam);
+      const listPosts = await PostModel.find();
+      const newArraySearch = [];
+
+      if (!titleParam) {
+        res.status(200).json({
+          success: true,
+          message: "Get post successfully",
+          data: listPosts,
+        });
+      } else {
+        listPosts.map((post) => {
+          const title = post.title;
+          const titleRemoveAccent = PostController.removeAccent(title);
+          const result = titleRemoveAccent
+            .toLowerCase()
+            .includes(titleParam.toLowerCase());
+
+          if (result) {
+            newArraySearch.push(post);
+          }
+        });
+
+        res.status(200).json({
+          success: true,
+          message: "search title successfully ",
+          data: newArraySearch,
+        });
+      }
     } catch (error) {
       res
         .status(500)

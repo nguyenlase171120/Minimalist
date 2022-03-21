@@ -21,7 +21,7 @@ function App() {
       <HomeChildren />
       <div className="px-[12%] flex">
         <Routes>
-          <Route path="/" element={<HomeContainer />} />
+          <Route path="/*" element={<HomeContainer />} />
         </Routes>
 
         <div className=" mt-[100px] w-[25%] ml-[100px] ">

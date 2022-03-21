@@ -18,4 +18,12 @@ router.get(
   PostController.getPostByCategory
 );
 
+router.get(
+  "/getArchives/:archives",
+  verifyToken,
+  PostController.getPostsByArchives
+);
+
+router.get("/search/:title", verifyToken, PostController.getPostsBySearch);
+
 module.exports = router;

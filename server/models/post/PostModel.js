@@ -35,7 +35,10 @@ const PostModel = new Schema(
             image: {
               type: String,
             },
-            link: {
+            linkYoutube: {
+              type: String,
+            },
+            linkProduct: {
               type: String,
             },
           },
@@ -45,7 +48,7 @@ const PostModel = new Schema(
             text: {
               type: String,
             },
-            link: {
+            linkProduct: {
               type: String,
             },
           },
