@@ -2,8 +2,26 @@ import React, { useState } from "react";
 import { FaPencilAlt } from "react-icons/fa";
 import { AiFillFolder, AiFillWechat } from "react-icons/ai";
 import ReactPlayer from "react-player/lazy";
+import { useNavigate } from "react-router-dom";
+import SharePost from "../../../Share/SharePost";
 
 const DetailPostChildren = ({ detail }) => {
+  const [category, setCategory] = useState(() => {
+    const listCategorys = detail.category.split(",");
+    return listCategorys;
+  });
+  const navigate = useNavigate();
+
+  const handleCategory = (category) => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    navigate(`/category/${category.trim()}`);
+  };
+
+  const handleAuthor = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    navigate(`/author`);
+  };
+
   return (
     <div className="flex items-center justify-center flex-col">
       <h1 className="text-[25px] tracking-widest">{detail.title}</h1>
@@ -12,12 +30,32 @@ const DetailPostChildren = ({ detail }) => {
         <div className="flex text-right mt-4">
           <div className="flex mr-6 items-center">
             <FaPencilAlt className="mr-2" />
-            <span className="detail-type">thehanoichamomile</span>
+            <span className="detail-type" onClick={handleAuthor}>
+              thehanoichamomile
+            </span>
           </div>
 
           <div className="flex mr-6 items-center">
             <AiFillFolder className="mr-2" />
-            <span className="detail-type">{detail.category}</span>
+            {category.length === 1 ? (
+              <span
+                className="detail-type"
+                onClick={() => handleCategory(category[0])}
+              >
+                {category[0]}
+              </span>
+            ) : (
+              category.map((item) => {
+                return (
+                  <span
+                    className="detail-type mr-2"
+                    onClick={() => handleCategory(item)}
+                  >
+                    {item},{" "}
+                  </span>
+                );
+              })
+            )}
           </div>
 
           <div className="flex  items-center">
@@ -120,6 +158,10 @@ const DetailPostChildren = ({ detail }) => {
             </a>
           );
         })}
+      </div>
+
+      <div className="text-left w-full">
+        <SharePost />
       </div>
     </div>
   );

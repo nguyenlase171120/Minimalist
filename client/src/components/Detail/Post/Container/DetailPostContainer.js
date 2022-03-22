@@ -13,7 +13,6 @@ const DetailPostContainer = () => {
       const result = await PostApi.getPostById(id);
 
       if (result) {
-        console.log(result);
         setPostDetail(result.data);
       }
     };

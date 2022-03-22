@@ -25,3 +25,7 @@
 .flex-item {
   @apply flex items-center justify-center;
 }
+
+.button-share {
+  @apply flex items-center rounded-md border-[1px] border-transparent hover:border-black  bg-[#F6F7F7] text-[#656565] p-2 text-sm mr-3;
+}

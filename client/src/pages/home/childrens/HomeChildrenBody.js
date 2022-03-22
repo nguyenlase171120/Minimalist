@@ -1,5 +1,5 @@
 import { AiOutlineArrowRight } from "react-icons/ai";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function HomeChildrenBody({ data }) {
   const navigate = useNavigate();

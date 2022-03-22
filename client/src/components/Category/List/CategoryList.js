@@ -6,13 +6,11 @@ import RingLoader from "react-spinners/RingLoader";
 
 const CategoryList = () => {
   const { typeCategory } = useParams();
-  const [listCategory, setListCategory] = useState();
-
+  const [listCategory, setListCategory] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       const result = await PostApi.getPostByCategory(typeCategory);
-
-      if (result) {
+      if (result.success === true) {
         setListCategory(result.data);
       }
     };
@@ -27,7 +25,7 @@ const CategoryList = () => {
           <span>Category : </span> {typeCategory}{" "}
         </h1>
 
-        {listCategory.length > 0 ? (
+        {listCategory.length >= 1 ? (
           <HomeChildrenList listPosts={listCategory} />
         ) : (
           <RingLoader color={"#123abc"} loading={true} css="" size={40} />

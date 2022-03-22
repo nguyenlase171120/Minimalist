@@ -199,7 +199,7 @@ function FooterBlog() {
               <input
                 type="text"
                 placeholder="Enter your email address"
-                className="outline-none placeholder:text-[#43423B] placeholder:text-sm mb-10 focus:border-2 mt-2 transition-all focus:border-[#D8B975] bg-black "
+                className="outline-none placeholder:text-[#43423B] placeholder:text-sm mb-10 border-2 border-transparent focus:border-2 mt-2 transition-all focus:border-[#D8B975] bg-black "
               />
               <div className="inline">
                 <a

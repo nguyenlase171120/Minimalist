@@ -262,7 +262,6 @@ const PostController = {
   getPostsBySearch: async (req, res) => {
     try {
       const titleParam = req.params.title;
-      console.log(titleParam);
       const listPosts = await PostModel.find();
       const newArraySearch = [];
 

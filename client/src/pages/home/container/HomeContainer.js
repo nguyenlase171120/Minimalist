@@ -4,6 +4,7 @@ import CategoryList from "../../../components/Category/List/CategoryList";
 import ArchivesList from "../../../components/Archives/List/ArchivesList";
 import DetailPostContainer from "../../../components/Detail/Post/Container/DetailPostContainer";
 import SearchContainer from "../../search/container/SearchContainer";
+import AuthorContainer from "../../../components/Author/AuthorContainer";
 
 function HomeContainer() {
   return (
@@ -14,6 +15,7 @@ function HomeContainer() {
         <Route path="/archives/:typeArchives" element={<ArchivesList />} />
         <Route path="/detail/:id" element={<DetailPostContainer />} />
         <Route path="/search/:title" element={<SearchContainer />} />
+        <Route path="/author" element={<AuthorContainer />} />
       </Routes>
     </div>
   );

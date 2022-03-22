@@ -32,7 +32,6 @@ const HomeChildrenRender = () => {
 
       if (result) {
         setSizeAllPosts(result.data.length);
-        console.log("size " + result.data.length);
       }
     };
 
@@ -54,7 +53,9 @@ const HomeChildrenRender = () => {
             }
           })
         ) : (
-          <RingLoader color={"#123abc"} loading={true} css="" size={40} />
+          <div className="text-center">
+            <RingLoader color={"#123abc"} loading={true} css="" size={40} />
+          </div>
         )}
       </div>
 
