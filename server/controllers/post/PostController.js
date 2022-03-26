@@ -174,6 +174,28 @@ const PostController = {
     }
   },
 
+  getPostsRelated: async (req, res) => {
+    try {
+      const { title, category } = req.query;
+
+      const listPost = await PostModel.find();
+
+      if (listPost.length > 0) {
+        res
+          .status(200)
+          .json({
+            success: true,
+            message: "Get related posts successfully",
+            data: listPost,
+          });
+      }
+    } catch (error) {
+      res
+        .status(500)
+        .json({ success: false, message: "Internal server error" });
+    }
+  },
+
   handleCoverMonth: (month) => {
     switch (month) {
       case "1": {

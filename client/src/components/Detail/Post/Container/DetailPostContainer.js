@@ -18,7 +18,7 @@ const DetailPostContainer = () => {
     };
 
     fetchData();
-  }, []);
+  }, [id]);
   return (
     <div>
       {postDetail ? (

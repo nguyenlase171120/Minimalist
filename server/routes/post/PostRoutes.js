@@ -25,5 +25,6 @@ router.get(
 );
 
 router.get("/search/:title", verifyToken, PostController.getPostsBySearch);
+router.get("/related", verifyToken, PostController.getPostsRelated);
 
 module.exports = router;

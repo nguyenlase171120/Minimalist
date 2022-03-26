@@ -4,12 +4,15 @@ import { AiFillFolder, AiFillWechat } from "react-icons/ai";
 import ReactPlayer from "react-player/lazy";
 import { useNavigate } from "react-router-dom";
 import SharePost from "../../../Share/SharePost";
+import PostRelatedContainer from "../../../Related/PostRelatedContainer";
+import CommentContainer from "../../../Comments/CommentContainer";
 
 const DetailPostChildren = ({ detail }) => {
   const [category, setCategory] = useState(() => {
     const listCategorys = detail.category.split(",");
     return listCategorys;
   });
+
   const navigate = useNavigate();
 
   const handleCategory = (category) => {
@@ -162,6 +165,14 @@ const DetailPostChildren = ({ detail }) => {
 
       <div className="text-left w-full">
         <SharePost />
+      </div>
+
+      <div className="text-left w-full">
+        <PostRelatedContainer title={detail.title} />
+      </div>
+
+      <div className="text-left w-full">
+        <CommentContainer title={detail.title} />
       </div>
     </div>
   );

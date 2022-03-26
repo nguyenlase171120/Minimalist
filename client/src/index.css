@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .header-link {
-  @apply hover:text-[#D8B975] p-5 tracking-widest cursor-pointer border-transparent;
+  @apply hover:text-[#D8B975] p-5 tracking-widest cursor-pointer border-transparent outline-none;
 }
 
 .header-icon {
@@ -28,4 +28,8 @@
 
 .button-share {
   @apply flex items-center rounded-md border-[1px] border-transparent hover:border-black  bg-[#F6F7F7] text-[#656565] p-2 text-sm mr-3;
+}
+
+.button-page {
+  @apply bg-gray-200 text-[15px] tracking-wider rounded-md hover:border-2 hover:border-black border-2 border-transparent py-4 px-6 hover:bg-gray-300 w-[45%] duration-150;
 }
