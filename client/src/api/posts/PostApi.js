@@ -30,4 +30,9 @@ export const PostApi = {
     const url = `/posts/search/${param}`;
     return axiosClient.get(url, param);
   },
+
+  getPostByTag: (param) => {
+    const url = `posts/tag/${param}`;
+    return axiosClient.get(url, param);
+  },
 };

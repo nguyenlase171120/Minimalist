@@ -8,6 +8,7 @@ const PostController = {
         title,
         image,
         category,
+        tag,
         description,
         linkYoutube,
         linkProduct,
@@ -18,6 +19,7 @@ const PostController = {
         title,
         image,
         category,
+        tag,
         descriptionTrailer,
         description,
         linkYoutube,
@@ -181,13 +183,11 @@ const PostController = {
       const listPost = await PostModel.find();
 
       if (listPost.length > 0) {
-        res
-          .status(200)
-          .json({
-            success: true,
-            message: "Get related posts successfully",
-            data: listPost,
-          });
+        res.status(200).json({
+          success: true,
+          message: "Get related posts successfully",
+          data: listPost,
+        });
       }
     } catch (error) {
       res
@@ -310,6 +310,39 @@ const PostController = {
           success: true,
           message: "search title successfully ",
           data: newArraySearch,
+        });
+      }
+    } catch (error) {
+      res
+        .status(500)
+        .json({ success: false, message: "Internal server error" });
+    }
+  },
+
+  //Get post by tag name
+  getPostsByTag: async (req, res) => {
+    try {
+      const tagName = req.params.tagName;
+      const listTags = await PostModel.find();
+      const newArray = [];
+
+      if (listTags) {
+        listTags.map((post) => {
+          const tag = post.tag;
+          if (tag) {
+            const listTagsDetail = tag.split(", ");
+            listTagsDetail.map((post2) => {
+              if (tagName === post2.toLowerCase().trim()) {
+                newArray.push(post);
+              }
+            });
+          }
+        });
+
+        return res.status(200).json({
+          success: true,
+          message: "Get data by tag success",
+          data: newArray,
         });
       }
     } catch (error) {

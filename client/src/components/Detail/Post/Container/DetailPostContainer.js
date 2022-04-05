@@ -24,7 +24,9 @@ const DetailPostContainer = () => {
       {postDetail ? (
         <DetailPostChildren detail={postDetail} />
       ) : (
-        <RingLoader color={"#123abc"} loading={true} css="" size={40} />
+        <div className="text-center">
+          <RingLoader color={"#123abc"} loading={true} css="" size={40} />
+        </div>
       )}
     </div>
   );

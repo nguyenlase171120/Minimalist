@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaPencilAlt } from "react-icons/fa";
-import { AiFillFolder, AiFillWechat } from "react-icons/ai";
+import { AiFillFolder, AiFillTag, AiFillWechat } from "react-icons/ai";
 import ReactPlayer from "react-player/lazy";
 import { useNavigate } from "react-router-dom";
 import SharePost from "../../../Share/SharePost";
@@ -11,6 +11,16 @@ const DetailPostChildren = ({ detail }) => {
   const [category, setCategory] = useState(() => {
     const listCategorys = detail.category.split(",");
     return listCategorys;
+  });
+
+  const [tag, setTag] = useState(() => {
+    if (detail.tag === undefined) {
+      return [];
+    } else {
+      const listTag = detail.tag.split(", ");
+
+      return listTag;
+    }
   });
 
   const navigate = useNavigate();
@@ -51,7 +61,7 @@ const DetailPostChildren = ({ detail }) => {
               category.map((item) => {
                 return (
                   <span
-                    className="detail-type mr-2"
+                    className="detail-type mr-2 "
                     onClick={() => handleCategory(item)}
                   >
                     {item},{" "}
@@ -60,6 +70,19 @@ const DetailPostChildren = ({ detail }) => {
               })
             )}
           </div>
+
+          {detail.tag && (
+            <div className="flex items-center mr-6 text-xs">
+              <AiFillTag className="mr-2" />
+              {tag.map((tag) => {
+                return (
+                  <span key={tag} className="detail-type mr-2">
+                    {tag},
+                  </span>
+                );
+              })}
+            </div>
+          )}
 
           <div className="flex  items-center">
             <AiFillWechat className="mr-2" />
@@ -75,15 +98,20 @@ const DetailPostChildren = ({ detail }) => {
           const title = item.titleDescription;
           const textArray = item.descriptionText;
           const linkArray = item.linkProductDesc;
+          const subTitle = item.subTitles;
 
           // eslint-disable-next-line no-lone-blocks
 
           // eslint-disable-next-line no-lone-blocks
 
           const titleUi = (
-            <h1 className="font-bold text-left text-[20px] w-full my-5">
-              {title}
-            </h1>
+            <div>
+              <h1 className="font-bold text-left text-[20px] w-full my-5">
+                {title}
+              </h1>
+
+              <h2 className="font-bold text-[15px] mb-2">{subTitle}</h2>
+            </div>
           );
 
           const result = textArray.map((value) => {
@@ -121,8 +149,8 @@ const DetailPostChildren = ({ detail }) => {
               {linkArray.length > 0 &&
                 linkArray.map((link) => {
                   return (
-                    <div className="flex items-center my-3">
-                      <p className="mr-2">{link.text}</p>
+                    <div className="flex justify-center flex-col my-3">
+                      <p className="mr-2 mb-2">{link.text}</p>
                       <p className="text-[#D8B975] hover:text-gray-400 cursor-pointer">
                         {link.linkProduct}
                       </p>

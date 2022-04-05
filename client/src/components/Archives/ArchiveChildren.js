@@ -14,7 +14,7 @@ const ArchiveChildren = ({ dateParam }) => {
       <ul>
         {dateParam.map((item, id) => {
           return (
-            <div className="flex items-center">
+            <div className="flex items-center mb-3">
               <li
                 key={id}
                 className=" hover:text-[#D8B975] cursor-pointer"
@@ -22,7 +22,7 @@ const ArchiveChildren = ({ dateParam }) => {
               >
                 {item.date}
               </li>
-              <span className="ml-2 text-[#D8B975] ">({item.size})</span>
+              <span className="ml-2 text-[#D8B975] ">({item.size + 1})</span>
             </div>
           );
         })}

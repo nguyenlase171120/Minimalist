@@ -26,5 +26,6 @@ router.get(
 
 router.get("/search/:title", verifyToken, PostController.getPostsBySearch);
 router.get("/related", verifyToken, PostController.getPostsRelated);
+router.get("/tag/:tagName", verifyToken, PostController.getPostsByTag);
 
 module.exports = router;

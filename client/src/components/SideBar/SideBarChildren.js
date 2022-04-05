@@ -67,6 +67,7 @@ function SideBarChildren() {
   const [keySearch, setKeySearch] = useState("");
 
   const handleSearch = () => {
+    setKeySearch("");
     window.scrollTo({ top: 0, behavior: "smooth" });
     navigate(`/search/${keySearch}`);
   };
@@ -77,12 +78,12 @@ function SideBarChildren() {
         <input
           type="text"
           onChange={(e) => setKeySearch(e.target.value)}
-          onKeyUp={handleSearch}
           className="border-2 flex justify-start  border-black py-1 w-[250px] px-1 focus:outline-none focus:border-2 focus:border-[#D8B975]"
+          value={keySearch}
         />
         <button
           onClick={handleSearch}
-          className="flex hover:bg-[#D8B975] outline-none border-2 border-transparent text-white mr-4 ml-3 hover:text-white bg-black py-1 px-7 items-center cursor-pointer absolute top-0 right-[-30px] bottom-0"
+          className="flex hover:bg-[#D8B975] outline-none border-2 border-transparent text-white mr-4 ml-3 hover:text-white bg-black py-1 px-5 items-center cursor-pointer absolute top-0 right-[-70px] bottom-0"
         >
           Search
           <AiOutlineArrowRight className="text-white ml-3 " />

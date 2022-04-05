@@ -4,7 +4,6 @@ import PostRelatedChildren from "./PostRelatedChildren";
 
 const PostRelatedContainer = ({ title }) => {
   const [listPosts, setListPosts] = useState([]);
-  const [index, setIndex] = useState(0);
   const [nextPost, setNextPost] = useState();
   const [prevPost, setPrevPost] = useState();
 
@@ -27,9 +26,17 @@ const PostRelatedContainer = ({ title }) => {
           const post = result.data[i];
 
           if (post.title === title) {
-            console.log(9);
-            const nextPost = result.data[i + 1];
-            const prevPost = result.data[i - 1];
+            let nextPost = result.data[i + 1];
+            let prevPost = result.data[i - 1];
+
+            if (prevPost === undefined) {
+              prevPost = result.data[result.data.length - 1];
+            }
+
+            if (nextPost === undefined) {
+              nextPost = result.data[0];
+            }
+
             setNextPost(nextPost);
             setPrevPost(prevPost);
             break;
@@ -41,10 +48,9 @@ const PostRelatedContainer = ({ title }) => {
     fetchData();
   }, [title]);
 
-  // console.log(listPosts);
   return (
     <div>
-      {listPosts.length > 0 && (
+      {listPosts.length > 0 && nextPost && prevPost && (
         <PostRelatedChildren data={listPosts} next={nextPost} prev={prevPost} />
       )}
     </div>

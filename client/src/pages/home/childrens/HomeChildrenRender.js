@@ -12,6 +12,7 @@ const HomeChildrenRender = () => {
   const [sizeAllPosts, setSizeAllPosts] = useState(0);
   let count = 0;
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
     const param = {
       page,

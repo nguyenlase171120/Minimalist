@@ -19,7 +19,7 @@
 }
 
 .detail-type {
-  @apply text-[#767676] hover:text-[#D8B975] cursor-pointer;
+  @apply text-[#767676] hover:text-[#D8B975] cursor-pointer text-[13px];
 }
 
 .flex-item {

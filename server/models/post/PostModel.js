@@ -15,6 +15,9 @@ const PostModel = new Schema(
       type: String,
       required: true,
     },
+    tag: {
+      type: String,
+    },
     descriptionTrailer: {
       type: String,
       required: true,

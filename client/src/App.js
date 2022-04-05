@@ -10,7 +10,7 @@ function App() {
   useEffect(() => {
     localStorage.setItem(
       "token",
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjFiMDY0MzdkOTQyYTQzOWM1YTBjNGQiLCJpYXQiOjE2NDY0NTIyNjUsImV4cCI6MTY0OTA0NDI2NX0.-VFXwR_DTRy6LkrzmvIK2eU_J4rSssWHKWhSeo3feJc"
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjFiMDY0MzdkOTQyYTQzOWM1YTBjNGQiLCJpYXQiOjE2NDkwNDU2MDksImV4cCI6MTY4MDU4MTYwOX0.XvSkt2XL_w_1sHVCxZ1WdQDTkChD3af9WZ3HxiPsm-w"
     );
   }, []);
 

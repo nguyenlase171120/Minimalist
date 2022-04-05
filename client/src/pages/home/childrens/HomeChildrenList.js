@@ -8,11 +8,16 @@ const HomeChildrenList = ({ listPosts }) => {
       <div className="flex items-center justify-between flex-wrap">
         {listPosts ? (
           listPosts.map((value, item) => {
-            return (
-              <div className="w-[45%] flex justify-center">
-                <HomeChildrenBody data={value} />
-              </div>
-            );
+            {
+              return (
+                value.title !== "About me" &&
+                value.title !== "ỦNG HỘ" && (
+                  <div className="w-[45%] flex justify-center">
+                    <HomeChildrenBody data={value} />
+                  </div>
+                )
+              );
+            }
           })
         ) : (
           <div className="text-center">

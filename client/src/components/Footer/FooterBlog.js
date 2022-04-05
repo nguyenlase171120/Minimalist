@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaFacebookSquare, FaInstagram, FaYoutube } from "react-icons/fa";
 
 function FooterBlog() {
@@ -38,7 +38,7 @@ function FooterBlog() {
 
   const listTags = useRef([
     {
-      text: "Daily file",
+      text: "Daily life",
       linkDirect: "/",
     },
     {
@@ -70,7 +70,7 @@ function FooterBlog() {
       linkDirect: "/",
     },
     {
-      text: "Khám phá",
+      text: "Khám Phá",
       linkDirect: "/",
     },
     {
@@ -111,6 +111,13 @@ function FooterBlog() {
     },
   ]);
 
+  const navigate = useNavigate();
+
+  const handleTag = (tag) => {
+    window.scrollTo(0, 0);
+    navigate(`tag/${tag}`);
+  };
+
   return (
     <div>
       <p className="py-3 w-full text-center bg-[#DDDDDD] uppercase mb-2">
@@ -148,13 +155,13 @@ function FooterBlog() {
             <div className="flex items-center  flex-wrap h-[280px] ">
               {listTags.current.map((tag, id) => {
                 return (
-                  <Link
+                  <p
                     key={id}
-                    to={tag.linkDirect}
-                    className="p-2 border-white border-2  mr-2 mb-3 text-[10px] transition-all hover:bg-white hover:text-black text-white"
+                    onClick={() => handleTag(tag.text)}
+                    className="p-2 cursor-pointer border-white border-2  mr-2 mb-3 text-[10px] transition-all hover:bg-white hover:text-black text-white"
                   >
                     {tag.text}
-                  </Link>
+                  </p>
                 );
               })}
             </div>

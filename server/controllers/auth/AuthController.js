@@ -77,7 +77,7 @@ const AuthController = {
         { userId: userExisted.id },
         process.env.ACCESS_TOKEN,
         {
-          expiresIn: "30d",
+          expiresIn: "365d",
         }
       );
 

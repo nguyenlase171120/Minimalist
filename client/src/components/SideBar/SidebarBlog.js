@@ -36,6 +36,7 @@ function SidebarBlog() {
               }
             });
           });
+          newArray[0].size = newArray[0].size - 2;
           setListPosts(newArray);
         }
       } catch (error) {
