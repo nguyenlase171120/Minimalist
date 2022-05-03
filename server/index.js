@@ -24,7 +24,7 @@ app.use("/posts", postRoutes);
 
 mongoose.connect(process.env.MONGOOSE_URI, () => {
   console.log("Connect DB successfully");
-  app.listen(5000, () => {
+  app.listen(process.env.PORT || 5000, () => {
     console.log("Server is running...");
   });
 });
